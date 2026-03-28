@@ -9,6 +9,7 @@ jobs:
   run-strategy:
     runs-on: ubuntu-latest
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
       ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
       ALPACA_URL: ${{ secrets.ALPACA_URL }}
