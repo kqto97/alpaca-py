@@ -15,10 +15,10 @@ jobs:
       ALPACA_PAPER_TRADE: ${{ secrets.ALPACA_PAPER_TRADE }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
