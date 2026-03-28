@@ -19,7 +19,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r examples/stocks/build_trading_bot_with_ChatGPT/requirements.txt
 
       - name: Run Trading Strategy
         run: |
@@ -28,14 +28,14 @@ jobs:
       - name: Display Trade Log
         if: always()
         run: |
-          cat trade_log.txt || echo "No trade log found yet"
+          cat examples/stocks/build_trading_bot_with_ChatGPT/trade_log.txt || echo "No trade log found yet"
 
       - name: Commit Trade Log
         if: always()
         run: |
           git config --local user.name 'GitHub Action'
           git config --local user.email 'action@github.com'
-          git add trade_log.txt || true
+          git add examples/stocks/build_trading_bot_with_ChatGPT/trade_log.txt || true
           git commit -m 'Update trade log' || echo 'No changes to commit'
           git push || true
 
