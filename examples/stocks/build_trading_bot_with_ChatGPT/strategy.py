@@ -60,12 +60,10 @@ macd_centerline_bar = None
 current_bar_index = 0
 
 # Load environment variables
-# Please safely store your API keys and never commit them to the repository (use .gitignore)
-load_dotenv()
-API_KEY = os.getenv("ALPACA_PAPER_API_KEY")
-API_SECRET = os.getenv("ALPACA_PAPER_SECRET_KEY") 
-ALPACA_PAPER_TRADE = os.getenv("ALPACA_PAPER_TRADE", "True")  # Default to paper trading (Returns "True" if ALPACA_PAPER_TRADE not set)
-trade_api_url = os.getenv("TRADE_API_URL")
+API_KEY = os.environ.get("ALPACA_KEY")
+API_SECRET = os.environ.get("ALPACA_SECRET") 
+ALPACA_PAPER_TRADE = os.environ.get("ALPACA_PAPER_TRADE", "True")  # Default to paper trading (Returns "True" if ALPACA_PAPER_TRADE not set)
+trade_api_url = os.environ.get("ALPACA_URL")
 
 if not API_KEY or not API_SECRET:
     raise RuntimeError("Missing Alpaca API credentials in environment variables.")
