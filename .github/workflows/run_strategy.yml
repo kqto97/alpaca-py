@@ -2,12 +2,17 @@ name: Run Trading Strategy
 
 on:
   schedule:
-    - cron: '0 14-20 * * 1-5' # Runs every hour on weekdays from 9 AM to 4 PM ET
+    - cron: '0 14-20 * * 1-5'
   workflow_dispatch: 
 
 jobs:
   run-strategy:
     runs-on: ubuntu-latest
+    env:
+      ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
+      ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
+      ALPACA_URL: ${{ secrets.ALPACA_URL }}
+      ALPACA_PAPER_TRADE: ${{ secrets.ALPACA_PAPER_TRADE }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -38,9 +43,3 @@ jobs:
           git add examples/stocks/build_trading_bot_with_ChatGPT/trade_log.txt || true
           git commit -m 'Update trade log' || echo 'No changes to commit'
           git push || true
-
-env:
-  ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
-  ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
-  ALPACA_URL: ${{ secrets.ALPACA_URL }}
-  ALPACA_PAPER_TRADE: ${{ secrets.ALPACA_PAPER_TRADE }}
