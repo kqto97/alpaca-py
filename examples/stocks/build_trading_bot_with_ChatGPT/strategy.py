@@ -139,9 +139,9 @@ def main():
     """Main trading loop and setup."""
     
     # Determine the stock (default to ProShares UltraPro QQQ if none is passed in)
-    parse = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
     parser.add_argument("--symbol", type=str, default="TQQQ")
-    args = parse.parse_args()
+    args = parser.parse_args()
     underlying_symbol = args.symbol
 
     # Configure logging
