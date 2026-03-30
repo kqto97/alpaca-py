@@ -1,4 +1,5 @@
 # Import standard library modules
+import argparse
 import logging
 import os
 import time
@@ -33,9 +34,6 @@ from alpaca.trading.requests import LimitOrderRequest, MarketOrderRequest
 # Set the local timezone
 NY_TZ = ZoneInfo('America/New_York')
 
-# Select the stock (ProShares UltraPro QQQ)
-underlying_symbol = 'TQQQ'
-
 # Strategy Parameters
 RSI_PERIOD       = 14                   # Standard medium‑term RSI
 MACD_FAST        = 12                   # MACD fast EMA
@@ -44,8 +42,8 @@ MACD_SIGNAL      = 9                    # MACD signal line EMA
 MA_FAST          = 50                   # Higher‑timeframe fast MA
 MA_MID           = 100                  # Higher‑timeframe mid MA
 MA_SLOW          = 200                  # Higher‑timeframe slow MA
-BUY_POWER_LIMIT  = 0.02                 # Limit the amount of buying power to use for the trade
-MAX_RISK_PCT     = 0.03                 # 1–3% position sizing
+BUY_POWER_LIMIT  = 0.05                 # Limit the amount of buying power to use for the trade
+MAX_RISK_PCT     = 0.10                 # 1–10% position sizing
 TIMEFRAME_MAIN   = TimeFrameUnit.Hour   # Suggested trading timeframe
 TIMEFRAME_TREND  = TimeFrameUnit.Day    # Trend‑defining timeframe
 
@@ -139,6 +137,13 @@ def get_next_bar_time(current_bar_time, timeframe):
 
 def main():
     """Main trading loop and setup."""
+    
+    # Determine the stock (default to ProShares UltraPro QQQ if none is passed in)
+    parse = argparse.ArgumentParser()
+    parser.add_argument("--symbol", type=str, default="TQQQ")
+    args = parse.parse_args()
+    underlying_symbol = args.symbol
+
     # Configure logging
     logging.basicConfig(
         filename="trade_log.txt",          # file to write
